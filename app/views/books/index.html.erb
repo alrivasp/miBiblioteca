@@ -1,0 +1,60 @@
+<!--Mensajeria Inicio-->
+<% if notice.present? %>
+    <div class="container alert alert-warning alert-dismissible fade show text-center" role="alert">
+        <strong><p id="notice"><%= notice %></p></strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+<% end %>
+
+
+<!--Mensajeria Fin-->
+
+<div class="container shadow-lg p-3 mb-5 mt-5 bg-white rounded">
+    <h3 class=" text-center text-muted mb-0"><strong>Administracion de Libros</strong></h3>
+    <div class="row justify-content-between m-3 small">
+        <div class="form-inline col-10 offset-1 ">
+            <%= search_form_for @q do |f| %>
+               ESTADO <i class="fa fa-filter" aria-hidden="true"> </i><small>  <%= f.select :status_eq, options_for_select(Book.statuses , @q.status_eq), {},{class: "custom-select inline text-small"} %></small>
+                <%= f.submit "FILTRAR", class: "btn btn-secondary" %>
+                 <%= link_to "LIMPIAR", books_path , class: "btn btn-dark" %>
+            <% end %>
+        </div>
+        <div class="col">
+            <a href="<%= new_book_path%>"><i class="fa fa-plus-circle text-success fa-3x mt-0 mb-2"></i></a>
+        </div>
+    </div>
+    <div class = "row">
+        <div class = "col ">
+            <table class = "table">
+                <thead class="bg-primary text-white text-center">
+                    <tr>
+                        <th><%= sort_link(@q, :title, "Titulo", {},{class: "text-white text-decoration-none"}) %> </th>
+                        <th> Autor </th>
+                        <th> Estado </th>
+                        <th> Fecha Salida </th>
+                        <th> Fecha Entreda</th>
+                        <th colspan = "3"> </th>
+                    </tr>
+                </thead>
+                <body >
+                    <% @books.each do | book | %>
+                    <tr class="border" style="font-size:15px;">
+                        <td class="border"><%= book.title.upcase %> </td>
+                        <td class="border"><%= book.author%> </td>
+                        <td class="border text-center"><%= book.status%> </td>
+                        <td class="border text-center"><%= book.date_out%> </td>
+                        <td class="border text-center"><%= book.date_in%> </td>
+                        <td><%= link_to 'Ver', book, class:"btn btn-info pt-0 pb-0 " %></td>
+                        <td><%= link_to 'Editar', edit_book_path(book), class:"btn btn-warning pt-0 pb-0 text-white" %></td>
+                        <td><%= link_to 'Eliminar', book, method: :delete, data: { confirm: '¿Estas Segur@?'}, class:"btn btn-danger pt-0 pb-0 " %></td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+<%= paginate @books%>
+</div>

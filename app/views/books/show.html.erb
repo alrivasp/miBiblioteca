@@ -1,0 +1,65 @@
+<div class="container pl-5 pr-5 pb-5" style="width:700px">
+  <div class="shadow-lg p-3 mb-4 mt-5 bg-white rounded ">    
+    <% if notice.present? %>
+      <div class="container alert alert-warning alert-dismissible fade show text-center" role="alert">
+          <strong><p id="notice"><%= notice %></p></strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+    <% end %>
+    <h2 class="text-center">Detalle Libro</h2>
+
+    <div class="row justify-content-center">
+      <div class="col-5 text-right">
+          <strong>Titulo:</strong>
+      </div>
+      <div class="col-6">
+        <%= @book.title %>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-5 text-right">
+          <strong>Autor:</strong>
+      </div>
+      <div class="col-6">
+        <%= @book.author %>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-5 text-right">
+          <strong>Estado:</strong>
+      </div>
+      <div class="col-6">
+        <%= @book.status %>
+      </div>
+    </div>
+
+    <% if @book.status == "PRESTADO" %>
+    <div class="row justify-content-center">     
+      <div class="col-5 text-right">
+          <strong>Fecha de Salida:</strong>
+      </div>
+      <div class="col-6">
+        <%= @book.date_out %>
+      </div>      
+    </div>
+    <div class="row justify-content-center">     
+      <div class="col-5 text-right">
+          <strong>Fecha de Entreda:</strong>
+      </div>
+      <div class="col-6">
+        <%= @book.date_in %>
+      </div>      
+    </div>
+    <% end%>
+
+    <div class="m-2 text-center">
+      <%= link_to 'Editar', edit_book_path(@book), class:"btn btn-warning" %> 
+      <%= link_to 'Back', books_path , class:"btn btn-primary" %>
+    </div>
+  </div>
+</div>
+

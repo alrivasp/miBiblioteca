@@ -1,0 +1,11 @@
+<div class="container pl-5 pr-5 pb-5">
+   <div class="shadow-lg p-3 mb-5 mt-5 bg-white rounded ">
+    <h2 class="text-center">Editar Libro</h1>
+    <%= render 'form', book: @book %>
+    <hr>
+    <div class="text-center">
+        <%= link_to 'Show', @book, class:"btn btn-info" %>
+        <%= link_to 'Back', books_path, class:"btn btn-primary" %>
+    </div>
+   </div>
+</div>
