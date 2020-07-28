@@ -6,6 +6,7 @@ class BooksController < ApplicationController
     def index
         #@books = Book.all
         #@books = Book.all.page(params[:page])
+        @book =  
         @q = Book.ransack(params[:q])
         #@books = @q.result(distinc: true)
         #@books = q.result(distinc: true).page(params[:page])
@@ -20,6 +21,8 @@ class BooksController < ApplicationController
     #Vista de Salida de Ingreso de libro
     def create
         @book = Book.new(book_params)
+        @book.title = @book.title.titleize
+        @book.author = @book.author.titleize
         if @book.save
             redirect_to books_path, notice: 'Libro fue creado Correctamente.-'
         else
@@ -57,7 +60,7 @@ class BooksController < ApplicationController
 
         #Metodo Strong Parameters para recibir y enviar los datos desde y hacia formulario
         def book_params
-            params.require(:book).permit(:title, :author, :status, :date_out, :date_in)
+            params.require(:book).permit(:title , :author, :status, :date_out, :date_in)
         end
 
 end
